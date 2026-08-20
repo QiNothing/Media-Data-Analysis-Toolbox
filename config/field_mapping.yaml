@@ -1,0 +1,251 @@
+# =============================================================================
+# 字段映射配置 —— 接入真实数据后拿到真实数据，只改这个文件，不用改代码
+# =============================================================================
+# 用法：左边是程序内部使用的标准字段名（不要改），
+#       右边 aliases 列出真实表头里所有可能的叫法（可以随便加）。
+#       程序读 Excel 时会自动把真实表头翻译成标准字段名。
+#       匹配规则：忽略大小写、忽略空格/下划线/横杠、支持中英文。
+# =============================================================================
+
+schema_version: 1
+
+# -----------------------------------------------------------------------------
+# 一、投放明细表（排期表 / 投放监播表 / 结算表）
+# -----------------------------------------------------------------------------
+placement:
+  date:
+    label: 日期
+    dtype: date
+    required: true
+    aliases: [日期, 播出日期, 投放日期, 日, date, air_date, broadcast_date, 播放日期]
+
+  channel:
+    label: 频道
+    dtype: str
+    required: true
+    aliases: [频道, 频道名称, 媒体, 媒体名称, 台, 电视台, channel, media, station, 频道名]
+
+  daypart:
+    label: 时段
+    dtype: str
+    required: false
+    aliases: [时段, 时间段, 播出时段, 档期, daypart, time_slot, 时间带]
+
+  program:
+    label: 节目
+    dtype: str
+    required: false
+    aliases: [节目, 节目名称, 栏目, 栏目名称, program, show, 剧目]
+
+  spot_time:
+    label: 播出时间
+    dtype: str
+    required: false
+    aliases: [播出时间, 具体时间, 时间, spot_time, air_time, 秒钟时间]
+
+  brand:
+    label: 品牌
+    dtype: str
+    required: false
+    aliases: [品牌, 广告主, 客户, brand, advertiser, client, 品牌名称]
+
+  product:
+    label: 产品
+    dtype: str
+    required: false
+    aliases: [产品, 产品名称, 子品牌, product, sku]
+
+  creative:
+    label: 素材
+    dtype: str
+    required: false
+    aliases: [素材, 素材名称, 版本, 广告片, creative, copy, 片名]
+
+  duration:
+    label: 时长(秒)
+    dtype: float
+    required: false
+    aliases: [时长, 时长(秒), 秒数, 广告时长, duration, length, sec, 秒]
+
+  spots:
+    label: 播出次数
+    dtype: float
+    required: false
+    aliases: [播出次数, 次数, 频次, 条数, spots, insertions, 播出条数, 露出次数]
+
+  rating:
+    label: 收视率(%)
+    dtype: float
+    required: false
+    aliases: [收视率, 收视率(%), 单次收视率, rating, tvr, rtg, 平均收视率]
+
+  grp:
+    label: GRP
+    dtype: float
+    required: false
+    aliases: [GRP, grp, 毛评点, 总收视点, GRPs, 收视点]
+
+  trp:
+    label: TRP
+    dtype: float
+    required: false
+    aliases: [TRP, trp, 目标毛评点, 目标收视点]
+
+  reach:
+    label: 到达率(%)
+    dtype: float
+    required: false
+    aliases: [到达率, 到达率(%), reach, 净到达率, 1+到达率, reach1plus]
+
+  impressions:
+    label: 曝光量
+    dtype: float
+    required: false
+    aliases: [曝光量, 曝光, 人次, 收视人次, impressions, imps, 触达人次, 到达人次]
+
+  rate_card:
+    label: 刊例价
+    dtype: float
+    required: false
+    aliases: [刊例价, 刊例, 刊例价格, 报价, rate_card, ratecard, list_price, 标价]
+
+  discount:
+    label: 折扣
+    dtype: float
+    required: false
+    aliases: [折扣, 折扣率, 折扣系数, discount, disc, 扣率]
+
+  cost:
+    label: 花费
+    dtype: float
+    required: true
+    aliases: [花费, 费用, 金额, 投放金额, 成本, 结算金额, cost, spend, amount, 实际花费, 净价]
+
+  region:
+    label: 区域
+    dtype: str
+    required: false
+    aliases: [区域, 地区, 城市, 市场, region, market, city, 省份]
+
+  target_audience:
+    label: 目标人群
+    dtype: str
+    required: false
+    aliases: [目标人群, 人群, 目标受众, target, audience, TA, 受众]
+
+# -----------------------------------------------------------------------------
+# 二、竞品投放表（ADQUEST / CTR / 秒针 竞品监测导出）
+# -----------------------------------------------------------------------------
+competitor:
+  date:
+    label: 日期
+    dtype: date
+    required: true
+    aliases: [日期, 月份, 月, date, month, 统计月份, 统计日期]
+
+  brand:
+    label: 品牌
+    dtype: str
+    required: true
+    aliases: [品牌, 广告主, brand, advertiser, 品牌名称, 竞品]
+
+  category:
+    label: 品类
+    dtype: str
+    required: false
+    aliases: [品类, 行业, 产品类别, category, industry, 类目]
+
+  channel:
+    label: 频道
+    dtype: str
+    required: false
+    aliases: [频道, 媒体, channel, media, 投放媒体]
+
+  grp:
+    label: GRP
+    dtype: float
+    required: false
+    aliases: [GRP, grp, 毛评点, 收视点]
+
+  spend:
+    label: 花费
+    dtype: float
+    required: false
+    aliases: [花费, 费用, 金额, 刊例花费, spend, cost, 投放额, 广告投放额]
+
+  spots:
+    label: 播出次数
+    dtype: float
+    required: false
+    aliases: [播出次数, 次数, 条数, spots, 频次]
+
+  duration:
+    label: 时长(秒)
+    dtype: float
+    required: false
+    aliases: [时长, 秒数, duration, 总时长]
+
+# -----------------------------------------------------------------------------
+# 三、频道基准表（用于预算分配与议价）
+# -----------------------------------------------------------------------------
+benchmark:
+  channel:
+    label: 频道
+    dtype: str
+    required: true
+    aliases: [频道, 媒体, channel, media, 频道名称]
+
+  cprp:
+    label: CPRP
+    dtype: float
+    required: false
+    aliases: [CPRP, cprp, 单点成本, 每收视点成本, cost_per_rating_point, 点成本]
+
+  avg_rating:
+    label: 平均收视率(%)
+    dtype: float
+    required: false
+    aliases: [平均收视率, 收视率, avg_rating, rating, 均值收视率]
+
+  universe:
+    label: 覆盖人口(万)
+    dtype: float
+    required: false
+    aliases: [覆盖人口, 覆盖人口(万), 人口基数, universe, population, 目标人群基数]
+
+  max_reach:
+    label: 理论最大到达率(%)
+    dtype: float
+    required: false
+    aliases: [理论最大到达率, 最大到达率, 覆盖率, max_reach, ceiling, 天花板到达率]
+
+  duplication:
+    label: 内部重复系数
+    dtype: float
+    required: false
+    aliases: [内部重复系数, 重复系数, 忠诚度系数, duplication, rho, 集中度]
+
+# -----------------------------------------------------------------------------
+# 四、频道别名归一（解决 "CCTV-1" / "CCTV1" / "央视一套" 混用的老大难问题）
+#     左边是标准名，右边是所有需要被归一到它的写法
+# -----------------------------------------------------------------------------
+channel_normalize:
+  CCTV-1: [CCTV1, CCTV-1, cctv1, 央视一套, 中央一套, 中央电视台综合频道, CCTV1综合, 综合频道]
+  CCTV-3: [CCTV3, CCTV-3, 央视三套, 中央三套, 综艺频道, CCTV3综艺]
+  CCTV-5: [CCTV5, CCTV-5, 央视五套, 中央五套, 体育频道, CCTV5体育]
+  CCTV-6: [CCTV6, CCTV-6, 央视六套, 电影频道, CCTV6电影]
+  CCTV-8: [CCTV8, CCTV-8, 央视八套, 电视剧频道, CCTV8电视剧]
+  湖南卫视: [湖南卫视, 湖南台, HNTV, 芒果台, 湖南电视台卫视频道]
+  浙江卫视: [浙江卫视, 浙江台, ZJTV, 蓝莓台]
+  江苏卫视: [江苏卫视, 江苏台, JSTV, 荔枝台]
+  东方卫视: [东方卫视, 上海东方卫视, SMG东方, 上海卫视, DFTV]
+  北京卫视: [北京卫视, 北京台, BTV, BTV卫视]
+  安徽卫视: [安徽卫视, 安徽台, AHTV]
+  山东卫视: [山东卫视, 山东台, SDTV]
+  广东卫视: [广东卫视, 广东台, GDTV]
+  深圳卫视: [深圳卫视, 深圳台, SZTV]
+  天津卫视: [天津卫视, 天津台, TJTV]
+  河南卫视: [河南卫视, 河南台, HNWS]
+  四川卫视: [四川卫视, 四川台, SCTV]
+  OTT开机屏: [OTT开机屏, 开机屏, 开机广告, OTT开机, 智能电视开机屏, 开机画报]
+  OTT贴片: [OTT贴片, 贴片, 贴片广告, OTT前贴, 前贴片, 智能电视贴片]
